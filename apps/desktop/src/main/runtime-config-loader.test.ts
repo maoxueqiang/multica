@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { mkdtemp, writeFile } from "fs/promises";
+import { mkdtemp, readFile, writeFile } from "fs/promises";
 import { join } from "path";
 import { tmpdir } from "os";
 import { describe, expect, it } from "vitest";
@@ -35,22 +35,30 @@ describe("loadRuntimeConfig", () => {
     });
   });
 
-  it("uses cloud defaults when packaged config is absent", async () => {
+  it("seeds the internal server config when packaged config is absent", async () => {
     const dir = await mkdtemp(join(tmpdir(), "multica-desktop-config-"));
+    const configPath = join(dir, "missing.json");
     await expect(
       loadRuntimeConfig({
         isDev: false,
-        configPath: join(dir, "missing.json"),
+        configPath,
         env: {},
       }),
     ).resolves.toEqual({
       ok: true,
       config: {
         schemaVersion: 1,
-        apiUrl: "https://api.multica.ai",
-        wsUrl: "wss://api.multica.ai/ws",
-        appUrl: "https://multica.ai",
+        apiUrl: "https://mc.ai.caijj.net",
+        wsUrl: "wss://mc.ai.caijj.net/ws",
+        appUrl: "https://mc.ai.caijj.net",
       },
+    });
+
+    expect(JSON.parse(await readFile(configPath, "utf-8"))).toEqual({
+      schemaVersion: 1,
+      apiUrl: "https://mc.ai.caijj.net",
+      wsUrl: "wss://mc.ai.caijj.net/ws",
+      appUrl: "https://mc.ai.caijj.net",
     });
   });
 

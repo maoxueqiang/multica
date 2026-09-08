@@ -1,6 +1,6 @@
 import { app } from "electron";
-import { readFile } from "fs/promises";
-import { join } from "path";
+import { mkdir, readFile, writeFile } from "fs/promises";
+import { dirname, join } from "path";
 import {
   DEFAULT_RUNTIME_CONFIG,
   parseRuntimeConfig,
@@ -29,6 +29,7 @@ export async function loadRuntimeConfig(options: {
     return { ok: true, config: parseRuntimeConfig(raw) };
   } catch (err) {
     if (isMissingFileError(err)) {
+      await seedDefaultRuntimeConfig(configPath);
       return { ok: true, config: { ...DEFAULT_RUNTIME_CONFIG } };
     }
     return {
@@ -37,6 +38,24 @@ export async function loadRuntimeConfig(options: {
         message: `Invalid ${configPath}: ${errorMessage(err)}`,
       },
     };
+  }
+}
+
+async function seedDefaultRuntimeConfig(configPath: string): Promise<void> {
+  try {
+    await mkdir(dirname(configPath), { recursive: true });
+    await writeFile(
+      configPath,
+      `${JSON.stringify(DEFAULT_RUNTIME_CONFIG, null, 2)}\n`,
+      { encoding: "utf-8", flag: "wx" },
+    );
+  } catch (err) {
+    if (!isAlreadyExistsError(err)) {
+      console.warn(
+        `Failed to persist default desktop config at ${configPath}:`,
+        err,
+      );
+    }
   }
 }
 
@@ -50,6 +69,15 @@ function isMissingFileError(err: unknown): boolean {
       typeof err === "object" &&
       "code" in err &&
       (err as NodeJS.ErrnoException).code === "ENOENT",
+  );
+}
+
+function isAlreadyExistsError(err: unknown): boolean {
+  return Boolean(
+    err &&
+      typeof err === "object" &&
+      "code" in err &&
+      (err as NodeJS.ErrnoException).code === "EEXIST",
   );
 }
 
