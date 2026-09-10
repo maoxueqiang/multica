@@ -29,7 +29,7 @@ vi.mock("../../i18n", () => ({
 }));
 
 describe("AllPlatforms", () => {
-  it("lists Intel macOS downloads separately from Apple Silicon", () => {
+  it("shows only four internal DMG and EXE installers", () => {
     render(
       <AllPlatforms
         assets={{
@@ -37,8 +37,10 @@ describe("AllPlatforms", () => {
           macArm64Zip: "https://downloads.test/mac-arm64.zip",
           macX64Dmg: "https://downloads.test/mac-x64.dmg",
           macX64Zip: "https://downloads.test/mac-x64.zip",
+          winX64Exe: "https://downloads.test/windows-x64.exe",
+          winArm64Exe: "https://downloads.test/windows-arm64.exe",
+          linuxAmd64AppImage: "https://downloads.test/linux-x64.AppImage",
         }}
-        fallbackHref="https://github.test/releases"
       />,
     );
 
@@ -49,9 +51,14 @@ describe("AllPlatforms", () => {
       "href",
       "https://downloads.test/mac-x64.dmg",
     );
-    expect(within(intelRow!).getByRole("link", { name: ".zip" })).toHaveAttribute(
-      "href",
-      "https://downloads.test/mac-x64.zip",
-    );
+    expect(screen.getByText("macOS · Apple Silicon")).toBeInTheDocument();
+    expect(screen.getByText("Windows · x64")).toBeInTheDocument();
+    expect(screen.getByText("Windows · ARM64")).toBeInTheDocument();
+    expect(screen.queryByText("Linux · x64")).not.toBeInTheDocument();
+    expect(screen.queryByText("Linux · ARM64")).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: ".zip" })).toHaveLength(2);
+    expect(
+      screen.queryByRole("link", { name: "View all releases" }),
+    ).not.toBeInTheDocument();
   });
 });

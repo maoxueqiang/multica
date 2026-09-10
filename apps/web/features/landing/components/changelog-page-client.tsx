@@ -10,7 +10,7 @@ import {
 import { LandingHeader } from "./landing-header";
 import { LandingFooter } from "./landing-footer";
 import { useLocale } from "../i18n";
-import type { Locale } from "../i18n/types";
+import type { LandingDict, Locale } from "../i18n/types";
 
 type ParsedDate = { year: number; month: number; day: number };
 
@@ -109,10 +109,18 @@ function ChangeList({ items }: { items: string[] }) {
   );
 }
 
-export function ChangelogPageClient() {
-  const { t, locale } = useLocale();
-  const categoryLabels = t.changelog.categories;
-  const entries = t.changelog.entries;
+export function ChangelogPageClient({
+  content,
+  localeOverride,
+}: {
+  content?: LandingDict["changelog"];
+  localeOverride?: Locale;
+} = {}) {
+  const { t, locale: selectedLocale } = useLocale();
+  const changelog = content ?? t.changelog;
+  const locale = localeOverride ?? selectedLocale;
+  const categoryLabels = changelog.categories;
+  const entries = changelog.entries;
   const groups = useMemo(() => groupByMonth(entries), [entries]);
 
   const [activeVersion, setActiveVersion] = useState<string>(
@@ -187,11 +195,11 @@ export function ChangelogPageClient() {
           <div className="lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-16">
             <aside className="hidden lg:block">
               <nav
-                aria-label={t.changelog.toc}
+                aria-label={changelog.toc}
                 className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8 pr-2"
               >
                 <h3 className="text-micro font-semibold uppercase tracking-[0.14em] text-[#0a0d12]/50">
-                  {t.changelog.toc}
+                  {changelog.toc}
                 </h3>
 
                 <div className="relative mt-5">
@@ -261,10 +269,10 @@ export function ChangelogPageClient() {
 
             <div className="mx-auto min-w-0 max-w-[720px] lg:mx-0">
               <h1 className="landing-serif text-[2.6rem] leading-[1.05] tracking-[-0.03em] sm:text-[3.4rem]">
-                {t.changelog.title}
+                {changelog.title}
               </h1>
               <p className="mt-4 text-body-lg leading-7 text-[#0a0d12]/60 sm:text-title-sm">
-                {t.changelog.subtitle}
+                {changelog.subtitle}
               </p>
 
               <div className="mt-16 space-y-16">

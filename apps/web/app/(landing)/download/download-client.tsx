@@ -15,9 +15,6 @@ import {
 } from "@/features/landing/utils/os-detect";
 import type { LatestRelease } from "@/features/landing/utils/github-release";
 
-const ALL_RELEASES_URL =
-  "https://github.com/multica-ai/multica/releases";
-
 export function DownloadClient({ release }: { release: LatestRelease }) {
   const [detected, setDetected] = useState<DetectResult | null>(null);
   const versionUnavailable = release.version === null;
@@ -32,8 +29,6 @@ export function DownloadClient({ release }: { release: LatestRelease }) {
       cancelled = true;
     };
   }, []);
-
-  const releaseHtmlUrl = release.htmlUrl ?? ALL_RELEASES_URL;
 
   return (
     <>
@@ -52,15 +47,12 @@ export function DownloadClient({ release }: { release: LatestRelease }) {
         />
       </div>
 
-      <AllPlatforms
-        assets={release.assets}
-        fallbackHref={ALL_RELEASES_URL}
-      />
+      <AllPlatforms assets={release.assets} />
       <CliSection />
       <CloudSection />
       <VersionInfoFooter
         version={release.version}
-        releaseHtmlUrl={releaseHtmlUrl}
+        releaseHtmlUrl={release.htmlUrl}
       />
       <LandingFooter />
     </>
@@ -72,7 +64,7 @@ function VersionInfoFooter({
   releaseHtmlUrl,
 }: {
   version: string | null;
-  releaseHtmlUrl: string;
+  releaseHtmlUrl: string | null;
 }) {
   const { t } = useLocale();
   const d = t.download.footer;
@@ -88,34 +80,22 @@ function VersionInfoFooter({
             <span aria-hidden className="text-[#0a0d12]/25">
               ·
             </span>
-            <Link
-              href={releaseHtmlUrl}
-              className="underline decoration-[#0a0d12]/30 underline-offset-4 hover:text-[#0a0d12] hover:decoration-[#0a0d12]/70"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {d.releaseNotes.replace("{version}", version)}
-            </Link>
-            <span aria-hidden className="text-[#0a0d12]/25">
-              ·
-            </span>
+            {releaseHtmlUrl ? (
+              <Link
+                href={releaseHtmlUrl}
+                className="underline decoration-[#0a0d12]/30 underline-offset-4 hover:text-[#0a0d12] hover:decoration-[#0a0d12]/70"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {d.releaseNotes.replace("{version}", version)}
+              </Link>
+            ) : null}
           </>
         ) : (
           <>
             <span>{d.versionUnavailable}</span>
-            <span aria-hidden className="text-[#0a0d12]/25">
-              ·
-            </span>
           </>
         )}
-        <Link
-          href={ALL_RELEASES_URL}
-          className="underline decoration-[#0a0d12]/30 underline-offset-4 hover:text-[#0a0d12] hover:decoration-[#0a0d12]/70"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {d.allReleases}
-        </Link>
       </div>
     </section>
   );

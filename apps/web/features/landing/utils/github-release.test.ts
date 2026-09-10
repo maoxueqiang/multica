@@ -62,12 +62,16 @@ afterEach(() => {
 
 describe("fetchLatestRelease", () => {
   it("uses the latest release when its desktop assets are complete", async () => {
-    mockFetchWithReleases([
+    const fetchMock = mockFetchWithReleases([
       releasePayload({ tag: "v0.2.14", assets: completeAssets("0.2.14") }),
       releasePayload({ tag: "v0.2.13", assets: completeAssets("0.2.13") }),
     ]);
 
     const result = await fetchLatestRelease();
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://mc.ai.caijj.net/releases/desktop/release.json",
+      { next: { revalidate: 300 } },
+    );
     expect(result.version).toBe("v0.2.14");
     expect(result.assets.winX64Exe).toContain("0.2.14");
   });

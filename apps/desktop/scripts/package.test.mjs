@@ -473,4 +473,18 @@ describe("electron-builder.yml packaging config", () => {
     expect(entries.length).toBeGreaterThan(0);
     expect(entries).toContain("!dist/**");
   });
+
+  it("embeds only the internal generic update provider", () => {
+    expect(configPath, "electron-builder.yml not found").toBeTruthy();
+    const raw = readFileSync(configPath, "utf-8");
+    const publishBlock = raw.match(/^publish:\s*\n((?:^[ \t]+.*\n?)*)/m)?.[1];
+
+    expect(publishBlock).toBeDefined();
+    expect(publishBlock).toMatch(/^ {2}provider: generic$/m);
+    expect(publishBlock).toMatch(
+      /^ {2}url: https:\/\/mc\.ai\.caijj\.net\/releases\/desktop$/m,
+    );
+    expect(publishBlock).not.toMatch(/^ {2}(?:owner|repo):/m);
+    expect(publishBlock).not.toContain("github");
+  });
 });

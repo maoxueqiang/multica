@@ -26,4 +26,17 @@ describe("resolveContent", () => {
       label: "or download .zip",
     });
   });
+
+  it("does not offer an internal Linux installer", () => {
+    const content = resolveContent(
+      { os: "linux", arch: "x64", archConfident: true },
+      { linuxAmd64AppImage: "https://downloads.test/linux.AppImage" },
+      false,
+      createEnDict(true).download.hero,
+    );
+
+    expect(content.primary).toBeUndefined();
+    expect(content.alt).toBeUndefined();
+    expect(content.title).toBe("Choose your platform");
+  });
 });

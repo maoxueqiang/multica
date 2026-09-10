@@ -5,10 +5,10 @@ import {
 } from "./parse-release-assets";
 
 /**
- * Server-side fetcher for the latest downloadable Multica release,
- * designed to run inside a Next.js server component. Response is cached
- * by the Next.js fetch cache for 5 minutes (Vercel ISR) so hitting
- * /download costs at most one GitHub API call per region per 5 minutes.
+ * Server-side fetcher for the latest downloadable Multica release.
+ * The company release manifest keeps the upstream GitHub Releases response
+ * shape so the existing selection and asset parsing logic can be reused.
+ * Response is cached by Next.js for 5 minutes.
  *
  * Desktop assets don't all land at the same time: CI uploads Linux and
  * Windows within a minute of each other, but macOS is packaged manually
@@ -36,8 +36,8 @@ export interface LatestRelease {
 // the page has to fall back to showing the newest one as-is. Releases
 // ship roughly daily, so that is days of head room — while staying one
 // cheap request.
-const GITHUB_RELEASES_URL =
-  "https://api.github.com/repos/multica-ai/multica/releases?per_page=5";
+const RELEASES_URL =
+  "https://mc.ai.caijj.net/releases/desktop/release.json";
 
 const REVALIDATE_SECONDS = 300;
 
@@ -51,28 +51,12 @@ interface GitHubReleasePayload {
 }
 
 export async function fetchLatestRelease(): Promise<LatestRelease> {
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-  };
-  // Optional PAT for local development and self-hosted deploys where
-  // the shared outbound IP keeps hitting the 60-requests/hour
-  // unauthenticated limit. Vercel's fetch cache is shared across all
-  // regions so production rarely needs this — but the env var lets
-  // anyone running the site locally avoid the rate-limit dance. Never
-  // prefix this with `NEXT_PUBLIC_`; the token must stay server-side.
-  const token = process.env.GITHUB_TOKEN;
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
-
   try {
-    const res = await fetch(GITHUB_RELEASES_URL, {
+    const res = await fetch(RELEASES_URL, {
       next: { revalidate: REVALIDATE_SECONDS },
-      headers,
     });
     if (!res.ok) {
-      throw new Error(`GitHub API responded ${res.status}`);
+      throw new Error(`release manifest responded ${res.status}`);
     }
     const data = (await res.json()) as GitHubReleasePayload[];
 
