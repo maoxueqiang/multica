@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: apps_web_desktop/desktop_app/electron_main
+title: Electron 主进程与守护进程编排
+scope:
+    - apps/desktop/src/main/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/desktop_app/renderer_ui
+    - path: apps_web_desktop/desktop_app/shared_types
+    - path: server/daemon_runtime/daemon_core

@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: apps_mobile/app_shell_and_routes
+title: 移动端应用外壳与路由配置
+scope:
+    - apps/mobile/app/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_mobile/components
+    - path: packages_core

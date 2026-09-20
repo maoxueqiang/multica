@@ -1,0 +1,13 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/auth_user_account
+title: 用户认证、个人访问令牌与工作区邀请 HTTP 处理器
+scope:
+    - server/internal/handler/auth.go
+    - server/internal/handler/personal_access_token.go
+    - server/internal/handler/invitation.go
+    - server/internal/handler/user_language_test.go
+    - server/internal/handler/user_timezone_test.go
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app

@@ -1,0 +1,16 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app
+title: Multica Web 应用（Next.js App Router）
+scope:
+    - apps/web/
+source_files: []
+depends_on: []
+related_to:
+    - path: server/http_handlers_and_services/agent_runtime_handlers
+    - path: server/http_handlers_and_services/auth_user_account
+    - path: server/http_handlers_and_services/chat_handlers
+    - path: server/http_handlers_and_services/cloud_billing_usage
+    - path: server/http_handlers_and_services/dashboard_mika_onboarding
+    - path: server/http_handlers_and_services/issue_handlers
+    - path: server/http_handlers_and_services/plugin_skill_handlers
+    - path: server/http_handlers_and_services/project_workspace_handlers

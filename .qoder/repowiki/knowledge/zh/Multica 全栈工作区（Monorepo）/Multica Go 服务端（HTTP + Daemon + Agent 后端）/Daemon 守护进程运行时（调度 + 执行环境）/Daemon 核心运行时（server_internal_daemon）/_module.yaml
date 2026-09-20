@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core
+title: Daemon 核心运行时（server/internal/daemon）
+scope:
+    - server/internal/daemon/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/desktop_app/electron_main
+    - path: server/http_handlers_and_services/daemon_search_config

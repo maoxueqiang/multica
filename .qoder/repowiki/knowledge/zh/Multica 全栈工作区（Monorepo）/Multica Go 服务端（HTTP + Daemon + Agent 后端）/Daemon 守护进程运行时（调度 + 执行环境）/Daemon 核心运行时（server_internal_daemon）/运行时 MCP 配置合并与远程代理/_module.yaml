@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core/runtime_lifecycle_mcp
+title: 运行时 MCP 配置合并与远程代理
+scope:
+    - server/internal/daemon/runtime_mcp.go
+    - server/internal/daemon/remote_mcp_broker.go
+    - server/internal/daemon/client.go
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/execenv

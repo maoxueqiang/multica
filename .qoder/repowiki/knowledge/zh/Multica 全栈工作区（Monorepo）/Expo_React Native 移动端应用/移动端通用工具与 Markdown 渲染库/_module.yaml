@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: apps_mobile/lib_utilities
+title: 移动端通用工具与 Markdown 渲染库
+scope:
+    - apps/mobile/lib/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_mobile/components
+    - path: packages_core

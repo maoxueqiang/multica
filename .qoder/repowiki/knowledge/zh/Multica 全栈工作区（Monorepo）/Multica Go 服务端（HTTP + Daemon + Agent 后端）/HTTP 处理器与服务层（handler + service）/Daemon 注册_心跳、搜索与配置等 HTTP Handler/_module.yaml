@@ -1,0 +1,14 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/daemon_search_config
+title: Daemon 注册/心跳、搜索与配置等 HTTP Handler
+scope:
+    - server/internal/handler/daemon*.go
+    - server/internal/handler/search.go
+    - server/internal/handler/config.go
+    - server/internal/handler/heartbeat_scheduler.go
+    - server/internal/handler/file.go
+    - server/internal/handler/share_link.go
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/daemon_core

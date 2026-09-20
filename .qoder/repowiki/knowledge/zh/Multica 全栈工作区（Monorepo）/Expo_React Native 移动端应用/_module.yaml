@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: apps_mobile
+title: Expo/React Native 移动端应用
+scope:
+    - apps/mobile/
+source_files: []
+depends_on: []
+related_to: []

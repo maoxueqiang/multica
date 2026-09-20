@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/workspace_dashboard/agents
+title: Agent 管理路由层（Web Dashboard）
+scope:
+    - apps/web/app/[workspaceSlug]/(dashboard)/agents/
+source_files: []
+depends_on: []
+related_to:
+    - path: packages_views

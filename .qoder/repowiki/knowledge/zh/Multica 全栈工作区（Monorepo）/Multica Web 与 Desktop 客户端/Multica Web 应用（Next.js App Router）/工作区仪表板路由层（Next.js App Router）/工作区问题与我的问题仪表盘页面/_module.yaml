@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/workspace_dashboard/issues_and_my_issues
+title: 工作区问题与我的问题仪表盘页面
+scope:
+    - apps/web/app/[workspaceSlug]/(dashboard)/issues/
+    - apps/web/app/[workspaceSlug]/(dashboard)/my-issues/
+source_files: []
+depends_on: []
+related_to:
+    - path: packages_views

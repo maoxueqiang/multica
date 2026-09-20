@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/dashboard_mika_onboarding
+title: Dashboard、Mika 智能体与 Onboarding HTTP 处理器
+scope:
+    - server/internal/handler/dashboard.go
+    - server/internal/handler/mika_agent.go
+    - server/internal/handler/mika_onboarding*.go
+    - server/internal/handler/onboarding*.go
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app

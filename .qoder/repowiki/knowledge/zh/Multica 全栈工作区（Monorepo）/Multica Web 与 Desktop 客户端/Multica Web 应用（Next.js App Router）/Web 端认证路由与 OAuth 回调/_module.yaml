@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/auth_routes
+title: Web 端认证路由与 OAuth 回调
+scope:
+    - apps/web/app/(auth)/
+    - apps/web/app/auth/callback/
+    - apps/web/features/auth/
+source_files: []
+depends_on: []
+related_to: []

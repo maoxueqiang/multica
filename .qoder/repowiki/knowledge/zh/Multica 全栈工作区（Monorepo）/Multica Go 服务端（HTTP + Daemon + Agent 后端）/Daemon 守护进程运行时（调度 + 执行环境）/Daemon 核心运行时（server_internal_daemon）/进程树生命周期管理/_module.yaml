@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core/processtree
+title: 进程树生命周期管理
+scope:
+    - server/internal/daemon/processtree/
+source_files: []
+depends_on: []
+related_to: []

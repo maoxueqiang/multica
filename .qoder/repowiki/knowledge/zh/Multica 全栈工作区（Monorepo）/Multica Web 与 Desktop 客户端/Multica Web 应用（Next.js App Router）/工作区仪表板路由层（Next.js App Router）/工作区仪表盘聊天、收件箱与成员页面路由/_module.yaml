@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/workspace_dashboard/chat_inbox_members
+title: 工作区仪表盘聊天、收件箱与成员页面路由
+scope:
+    - apps/web/app/[workspaceSlug]/(dashboard)/chat/
+    - apps/web/app/[workspaceSlug]/(dashboard)/inbox/
+    - apps/web/app/[workspaceSlug]/(dashboard)/members/
+source_files: []
+depends_on: []
+related_to:
+    - path: packages_views

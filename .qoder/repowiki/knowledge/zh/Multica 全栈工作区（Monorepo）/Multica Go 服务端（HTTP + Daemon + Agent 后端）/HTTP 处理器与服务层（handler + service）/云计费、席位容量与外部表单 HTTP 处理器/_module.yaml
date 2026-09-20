@@ -1,0 +1,13 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/cloud_billing_usage
+title: 云计费、席位容量与外部表单 HTTP 处理器
+scope:
+    - server/internal/handler/cloud_billing.go
+    - server/internal/handler/client_usage.go
+    - server/internal/handler/seat_capacity.go
+    - server/internal/handler/feedback.go
+    - server/internal/handler/contact_sales.go
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app

@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/autopilot_handlers
+title: Autopilot HTTP 处理器与 Webhook 入口
+scope:
+    - server/internal/handler/autopilot*.go
+    - server/internal/handler/trigger*.go
+source_files: []
+depends_on: []
+related_to:
+    - path: server/http_handlers_and_services/service_core

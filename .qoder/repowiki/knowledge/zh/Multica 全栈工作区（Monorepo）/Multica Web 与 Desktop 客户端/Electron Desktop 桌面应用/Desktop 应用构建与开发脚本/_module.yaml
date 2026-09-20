@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: apps_web_desktop/desktop_app/build_scripts
+title: Desktop 应用构建与开发脚本
+scope:
+    - apps/desktop/scripts/
+source_files: []
+depends_on: []
+related_to: []

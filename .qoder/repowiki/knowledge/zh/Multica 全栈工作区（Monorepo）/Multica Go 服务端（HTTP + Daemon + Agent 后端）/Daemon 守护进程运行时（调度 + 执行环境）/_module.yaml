@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: server/daemon_runtime
+title: Daemon 守护进程运行时（调度 + 执行环境）
+scope:
+    - server/internal/daemon/
+    - server/internal/daemon/execenv/
+source_files: []
+depends_on: []
+related_to:
+    - path: server/agent_pkg

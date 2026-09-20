@@ -1,0 +1,17 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/integrations_webhooks
+title: 第三方集成与 Webhook 处理层
+scope:
+    - server/internal/handler/github.go
+    - server/internal/handler/slack.go
+    - server/internal/handler/dingtalk.go
+    - server/internal/handler/lark.go
+    - server/internal/handler/wecom_web.go
+    - server/internal/handler/telegram.go
+    - server/internal/handler/vcs*.go
+    - server/internal/handler/integrations_composio.go
+    - server/internal/handler/webhook_*.go
+source_files: []
+depends_on: []
+related_to:
+    - path: server/http_handlers_and_services/service_core

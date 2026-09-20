@@ -1,0 +1,695 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: zh-CN
+branch: main
+nodes_managed: true
+exported_at: "2026-09-20T03:04:57Z"
+modules:
+    "":
+        dir_name: Multica 全栈工作区（Monorepo）
+        title: Multica 全栈工作区（Monorepo）
+        scope:
+            - README.md
+            - CONTRIBUTING.md
+            - CLAUDE.md
+            - AGENTS.md
+            - VISION.md
+            - CLI_AND_DAEMON.md
+            - CLI_INSTALL.md
+            - SELF_HOSTING*.md
+            - .github/
+            - scripts/
+            - deploy/
+            - docker/
+            - e2e/
+            - examples/
+            - .agents/
+            - .dockerignore
+            - .env.example
+            - .gitattributes
+            - .gitignore
+            - .goreleaser.yml
+            - .npmrc
+            - .nvmrc
+            - .vercelignore
+            - Dockerfile
+            - Dockerfile.web
+            - LICENSE
+            - Makefile
+            - NOTICE
+            - README.zh.md
+            - SELF_HOSTING.md
+            - SELF_HOSTING_ADVANCED.md
+            - SELF_HOSTING_AI.md
+            - VISION.zh.md
+            - docker-compose.selfhost.build.yml
+            - docker-compose.selfhost.yml
+            - docker-compose.yml
+            - knip.jsonc
+            - package.json
+            - playwright.config.ts
+            - playwright.iframe.config.ts
+            - pnpm-lock.yaml
+            - pnpm-workspace.yaml
+            - skills-lock.json
+            - turbo.json
+        source_files: []
+        children:
+            - apps_docs
+            - apps_mobile
+            - apps_web_desktop
+            - packages_core
+            - packages_ui
+            - packages_views
+            - server
+        depends_on: []
+        related_to: []
+    apps_docs:
+        dir_name: Multica 文档站点（Fumadocs + Next.js）
+        title: Multica 文档站点（Fumadocs + Next.js）
+        scope:
+            - apps/docs/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_core
+    apps_mobile:
+        dir_name: Expo_React Native 移动端应用
+        title: Expo/React Native 移动端应用
+        scope:
+            - apps/mobile/
+        source_files: []
+        children:
+            - apps_mobile/app_shell_and_routes
+            - apps_mobile/components
+            - apps_mobile/lib_utilities
+        depends_on: []
+        related_to: []
+    apps_mobile/app_shell_and_routes:
+        dir_name: 移动端应用外壳与路由配置
+        title: 移动端应用外壳与路由配置
+        scope:
+            - apps/mobile/app/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_mobile/components
+            - path: packages_core
+    apps_mobile/components:
+        dir_name: 移动端业务组件库（Chat_Issue_Project_Composer_UI）
+        title: 移动端业务组件库（Chat/Issue/Project/Composer/UI）
+        scope:
+            - apps/mobile/components/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_mobile/app_shell_and_routes
+            - path: apps_mobile/lib_utilities
+            - path: packages_core
+    apps_mobile/lib_utilities:
+        dir_name: 移动端通用工具与 Markdown 渲染库
+        title: 移动端通用工具与 Markdown 渲染库
+        scope:
+            - apps/mobile/lib/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_mobile/components
+            - path: packages_core
+    apps_web_desktop:
+        dir_name: Multica Web 与 Desktop 客户端
+        title: Multica Web 与 Desktop 客户端
+        scope:
+            - apps/web/
+            - apps/desktop/
+        source_files: []
+        children:
+            - apps_web_desktop/desktop_app
+            - apps_web_desktop/web_app
+        depends_on: []
+        related_to: []
+    apps_web_desktop/desktop_app:
+        dir_name: Electron Desktop 桌面应用
+        title: Electron Desktop 桌面应用
+        scope:
+            - apps/desktop/
+        source_files: []
+        children:
+            - apps_web_desktop/desktop_app/build_scripts
+            - apps_web_desktop/desktop_app/electron_main
+            - apps_web_desktop/desktop_app/renderer_ui
+            - apps_web_desktop/desktop_app/shared_types
+        depends_on: []
+        related_to: []
+    apps_web_desktop/desktop_app/build_scripts:
+        dir_name: Desktop 应用构建与开发脚本
+        title: Desktop 应用构建与开发脚本
+        scope:
+            - apps/desktop/scripts/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    apps_web_desktop/desktop_app/electron_main:
+        dir_name: Electron 主进程与守护进程编排
+        title: Electron 主进程与守护进程编排
+        scope:
+            - apps/desktop/src/main/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/desktop_app/renderer_ui
+            - path: apps_web_desktop/desktop_app/shared_types
+            - path: server/daemon_runtime/daemon_core
+    apps_web_desktop/desktop_app/renderer_ui:
+        dir_name: 桌面端渲染进程 UI（Electron Renderer）
+        title: 桌面端渲染进程 UI（Electron Renderer）
+        scope:
+            - apps/desktop/src/renderer/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/desktop_app/electron_main
+            - path: apps_web_desktop/desktop_app/shared_types
+    apps_web_desktop/desktop_app/shared_types:
+        dir_name: 桌面端共享类型与跨进程协议
+        title: 桌面端共享类型与跨进程协议
+        scope:
+            - apps/desktop/src/shared/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/desktop_app/electron_main
+            - path: apps_web_desktop/desktop_app/renderer_ui
+    apps_web_desktop/web_app:
+        dir_name: Multica Web 应用（Next.js App Router）
+        title: Multica Web 应用（Next.js App Router）
+        scope:
+            - apps/web/
+        source_files: []
+        children:
+            - apps_web_desktop/web_app/auth_routes
+            - apps_web_desktop/web_app/landing_routes
+            - apps_web_desktop/web_app/platform_runtime
+            - apps_web_desktop/web_app/shared_libs
+            - apps_web_desktop/web_app/workspace_dashboard
+        depends_on: []
+        related_to:
+            - path: server/http_handlers_and_services/agent_runtime_handlers
+            - path: server/http_handlers_and_services/auth_user_account
+            - path: server/http_handlers_and_services/chat_handlers
+            - path: server/http_handlers_and_services/cloud_billing_usage
+            - path: server/http_handlers_and_services/dashboard_mika_onboarding
+            - path: server/http_handlers_and_services/issue_handlers
+            - path: server/http_handlers_and_services/plugin_skill_handlers
+            - path: server/http_handlers_and_services/project_workspace_handlers
+    apps_web_desktop/web_app/auth_routes:
+        dir_name: Web 端认证路由与 OAuth 回调
+        title: Web 端认证路由与 OAuth 回调
+        scope:
+            - apps/web/app/(auth)/
+            - apps/web/app/auth/callback/
+            - apps/web/features/auth/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    apps_web_desktop/web_app/landing_routes:
+        dir_name: Landing 营销站点路由与页面
+        title: Landing 营销站点路由与页面
+        scope:
+            - apps/web/app/(landing)/
+            - apps/web/features/landing/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    apps_web_desktop/web_app/platform_runtime:
+        dir_name: Web 平台运行时适配层
+        title: Web 平台运行时适配层
+        scope:
+            - apps/web/platform/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_views
+    apps_web_desktop/web_app/shared_libs:
+        dir_name: Web 应用共享工具库与运行时配置
+        title: Web 应用共享工具库与运行时配置
+        scope:
+            - apps/web/lib/
+            - apps/web/config/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    apps_web_desktop/web_app/workspace_dashboard:
+        dir_name: 工作区仪表板路由层（Next.js App Router）
+        title: 工作区仪表板路由层（Next.js App Router）
+        scope:
+            - apps/web/app/[workspaceSlug]/(dashboard)/
+        source_files: []
+        children:
+            - apps_web_desktop/web_app/workspace_dashboard/agents
+            - apps_web_desktop/web_app/workspace_dashboard/billing_usage_settings
+            - apps_web_desktop/web_app/workspace_dashboard/chat_inbox_members
+            - apps_web_desktop/web_app/workspace_dashboard/issues_and_my_issues
+            - apps_web_desktop/web_app/workspace_dashboard/runtimes
+        depends_on: []
+        related_to: []
+    apps_web_desktop/web_app/workspace_dashboard/agents:
+        dir_name: Agent 管理路由层（Web Dashboard）
+        title: Agent 管理路由层（Web Dashboard）
+        scope:
+            - apps/web/app/[workspaceSlug]/(dashboard)/agents/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_views
+    apps_web_desktop/web_app/workspace_dashboard/billing_usage_settings:
+        dir_name: 工作区仪表盘路由入口（账单_用量_设置）
+        title: 工作区仪表盘路由入口（账单/用量/设置）
+        scope:
+            - apps/web/app/[workspaceSlug]/(dashboard)/billing/
+            - apps/web/app/[workspaceSlug]/(dashboard)/usage/
+            - apps/web/app/[workspaceSlug]/(dashboard)/settings/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_views
+    apps_web_desktop/web_app/workspace_dashboard/chat_inbox_members:
+        dir_name: 工作区仪表盘聊天、收件箱与成员页面路由
+        title: 工作区仪表盘聊天、收件箱与成员页面路由
+        scope:
+            - apps/web/app/[workspaceSlug]/(dashboard)/chat/
+            - apps/web/app/[workspaceSlug]/(dashboard)/inbox/
+            - apps/web/app/[workspaceSlug]/(dashboard)/members/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_views
+    apps_web_desktop/web_app/workspace_dashboard/issues_and_my_issues:
+        dir_name: 工作区问题与我的问题仪表盘页面
+        title: 工作区问题与我的问题仪表盘页面
+        scope:
+            - apps/web/app/[workspaceSlug]/(dashboard)/issues/
+            - apps/web/app/[workspaceSlug]/(dashboard)/my-issues/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_views
+    apps_web_desktop/web_app/workspace_dashboard/runtimes:
+        dir_name: 工作区运行时路由层
+        title: 工作区运行时路由层
+        scope:
+            - apps/web/app/[workspaceSlug]/(dashboard)/runtimes/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: packages_views
+    packages_core:
+        dir_name: '@multica_core 共享业务核心包'
+        title: '@multica/core 共享业务核心包'
+        scope:
+            - packages/core/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_docs
+            - path: apps_mobile/app_shell_and_routes
+            - path: apps_mobile/components
+            - path: apps_mobile/lib_utilities
+    packages_ui:
+        dir_name: 共享 UI 组件库 (@multica_ui)
+        title: 共享 UI 组件库 (@multica/ui)
+        scope:
+            - packages/ui/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    packages_views:
+        dir_name: Web_Desktop 共享业务视图层 (@multica_views)
+        title: Web/Desktop 共享业务视图层 (@multica/views)
+        scope:
+            - packages/views/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app/platform_runtime
+            - path: apps_web_desktop/web_app/workspace_dashboard/agents
+            - path: apps_web_desktop/web_app/workspace_dashboard/billing_usage_settings
+            - path: apps_web_desktop/web_app/workspace_dashboard/chat_inbox_members
+            - path: apps_web_desktop/web_app/workspace_dashboard/issues_and_my_issues
+            - path: apps_web_desktop/web_app/workspace_dashboard/runtimes
+    server:
+        dir_name: Multica Go 服务端（HTTP + Daemon + Agent 后端）
+        title: Multica Go 服务端（HTTP + Daemon + Agent 后端）
+        scope:
+            - server/
+        source_files: []
+        children:
+            - server/agent_pkg
+            - server/daemon_runtime
+            - server/http_handlers_and_services
+            - server/server_core_libs
+        depends_on: []
+        related_to: []
+    server/agent_pkg:
+        dir_name: 多智能体后端统一执行层（Agent Backends）
+        title: 多智能体后端统一执行层（Agent Backends）
+        scope:
+            - server/pkg/agent/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime
+            - path: server/http_handlers_and_services/service_core
+    server/daemon_runtime:
+        dir_name: Daemon 守护进程运行时（调度 + 执行环境）
+        title: Daemon 守护进程运行时（调度 + 执行环境）
+        scope:
+            - server/internal/daemon/
+            - server/internal/daemon/execenv/
+        source_files: []
+        children:
+            - server/daemon_runtime/daemon_core
+            - server/daemon_runtime/execenv
+            - server/daemon_runtime/processtree_gc
+        depends_on: []
+        related_to:
+            - path: server/agent_pkg
+    server/daemon_runtime/daemon_core:
+        dir_name: Daemon 核心运行时（server_internal_daemon）
+        title: Daemon 核心运行时（server/internal/daemon）
+        scope:
+            - server/internal/daemon/
+        source_files: []
+        children:
+            - server/daemon_runtime/daemon_core/config_identity_wakeup_reconcile_gc
+            - server/daemon_runtime/daemon_core/execenv
+            - server/daemon_runtime/daemon_core/processtree
+            - server/daemon_runtime/daemon_core/repocache
+            - server/daemon_runtime/daemon_core/runtime_lifecycle_mcp
+            - server/daemon_runtime/daemon_core/skill_bundle_resolution
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/desktop_app/electron_main
+            - path: server/http_handlers_and_services/daemon_search_config
+    server/daemon_runtime/daemon_core/config_identity_wakeup_reconcile_gc:
+        dir_name: 守护进程配置、身份与任务唤醒协调
+        title: 守护进程配置、身份与任务唤醒协调
+        scope:
+            - server/internal/daemon/config.go
+            - server/internal/daemon/identity.go
+            - server/internal/daemon/wakeup.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/processtree_gc
+    server/daemon_runtime/daemon_core/execenv:
+        dir_name: 任务执行环境装配与隔离
+        title: 任务执行环境装配与隔离
+        scope:
+            - server/internal/daemon/execenv/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    server/daemon_runtime/daemon_core/processtree:
+        dir_name: 进程树生命周期管理
+        title: 进程树生命周期管理
+        scope:
+            - server/internal/daemon/processtree/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    server/daemon_runtime/daemon_core/repocache:
+        dir_name: 仓库缓存与工作树管理（repocache）
+        title: 仓库缓存与工作树管理（repocache）
+        scope:
+            - server/internal/daemon/repocache/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/execenv
+    server/daemon_runtime/daemon_core/runtime_lifecycle_mcp:
+        dir_name: 运行时 MCP 配置合并与远程代理
+        title: 运行时 MCP 配置合并与远程代理
+        scope:
+            - server/internal/daemon/runtime_mcp.go
+            - server/internal/daemon/remote_mcp_broker.go
+            - server/internal/daemon/client.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/execenv
+    server/daemon_runtime/daemon_core/skill_bundle_resolution:
+        dir_name: 本地技能包发现与缓存解析
+        title: 本地技能包发现与缓存解析
+        scope:
+            - server/internal/daemon/local_skills.go
+            - server/internal/daemon/skill_cache.go
+            - server/internal/daemon/slash_skill.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/execenv
+    server/daemon_runtime/execenv:
+        dir_name: 任务执行环境装配与隔离
+        title: 任务执行环境装配与隔离
+        scope:
+            - server/internal/daemon/execenv/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/daemon_core/repocache
+            - path: server/daemon_runtime/daemon_core/runtime_lifecycle_mcp
+            - path: server/daemon_runtime/daemon_core/skill_bundle_resolution
+            - path: server/daemon_runtime/processtree_gc
+    server/daemon_runtime/processtree_gc:
+        dir_name: 进程树管理与仓库缓存（processtree + repocache）
+        title: 进程树管理与仓库缓存（processtree + repocache）
+        scope:
+            - server/internal/daemon/processtree/
+            - server/internal/daemon/repocache/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/daemon_core/config_identity_wakeup_reconcile_gc
+            - path: server/daemon_runtime/execenv
+    server/http_handlers_and_services:
+        dir_name: HTTP 处理器与服务层（handler + service）
+        title: HTTP 处理器与服务层（handler + service）
+        scope:
+            - server/internal/handler/
+            - server/internal/service/
+        source_files: []
+        children:
+            - server/http_handlers_and_services/agent_runtime_handlers
+            - server/http_handlers_and_services/auth_user_account
+            - server/http_handlers_and_services/autopilot_handlers
+            - server/http_handlers_and_services/chat_handlers
+            - server/http_handlers_and_services/cloud_billing_usage
+            - server/http_handlers_and_services/daemon_search_config
+            - server/http_handlers_and_services/dashboard_mika_onboarding
+            - server/http_handlers_and_services/integrations_webhooks
+            - server/http_handlers_and_services/issue_handlers
+            - server/http_handlers_and_services/plugin_skill_handlers
+            - server/http_handlers_and_services/project_workspace_handlers
+            - server/http_handlers_and_services/service_core
+        depends_on: []
+        related_to: []
+    server/http_handlers_and_services/agent_runtime_handlers:
+        dir_name: Agent 与 Runtime HTTP 处理器
+        title: Agent 与 Runtime HTTP 处理器
+        scope:
+            - server/internal/handler/agent*.go
+            - server/internal/handler/actor_guards.go
+            - server/internal/handler/admission.go
+            - server/internal/handler/runtime*.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/auth_user_account:
+        dir_name: 用户认证、个人访问令牌与工作区邀请 HTTP 处理器
+        title: 用户认证、个人访问令牌与工作区邀请 HTTP 处理器
+        scope:
+            - server/internal/handler/auth.go
+            - server/internal/handler/personal_access_token.go
+            - server/internal/handler/invitation.go
+            - server/internal/handler/user_language_test.go
+            - server/internal/handler/user_timezone_test.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/autopilot_handlers:
+        dir_name: Autopilot HTTP 处理器与 Webhook 入口
+        title: Autopilot HTTP 处理器与 Webhook 入口
+        scope:
+            - server/internal/handler/autopilot*.go
+            - server/internal/handler/trigger*.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/http_handlers_and_services/service_core
+    server/http_handlers_and_services/chat_handlers:
+        dir_name: 聊天会话、评论与钉选 HTTP 处理器
+        title: 聊天会话、评论与钉选 HTTP 处理器
+        scope:
+            - server/internal/handler/chat*.go
+            - server/internal/handler/comment*.go
+            - server/internal/handler/reaction.go
+            - server/internal/handler/pin.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/cloud_billing_usage:
+        dir_name: 云计费、席位容量与外部表单 HTTP 处理器
+        title: 云计费、席位容量与外部表单 HTTP 处理器
+        scope:
+            - server/internal/handler/cloud_billing.go
+            - server/internal/handler/client_usage.go
+            - server/internal/handler/seat_capacity.go
+            - server/internal/handler/feedback.go
+            - server/internal/handler/contact_sales.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/daemon_search_config:
+        dir_name: Daemon 注册_心跳、搜索与配置等 HTTP Handler
+        title: Daemon 注册/心跳、搜索与配置等 HTTP Handler
+        scope:
+            - server/internal/handler/daemon*.go
+            - server/internal/handler/search.go
+            - server/internal/handler/config.go
+            - server/internal/handler/heartbeat_scheduler.go
+            - server/internal/handler/file.go
+            - server/internal/handler/share_link.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/daemon_runtime/daemon_core
+    server/http_handlers_and_services/dashboard_mika_onboarding:
+        dir_name: Dashboard、Mika 智能体与 Onboarding HTTP 处理器
+        title: Dashboard、Mika 智能体与 Onboarding HTTP 处理器
+        scope:
+            - server/internal/handler/dashboard.go
+            - server/internal/handler/mika_agent.go
+            - server/internal/handler/mika_onboarding*.go
+            - server/internal/handler/onboarding*.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/integrations_webhooks:
+        dir_name: 第三方集成与 Webhook 处理层
+        title: 第三方集成与 Webhook 处理层
+        scope:
+            - server/internal/handler/github.go
+            - server/internal/handler/slack.go
+            - server/internal/handler/dingtalk.go
+            - server/internal/handler/lark.go
+            - server/internal/handler/wecom_web.go
+            - server/internal/handler/telegram.go
+            - server/internal/handler/vcs*.go
+            - server/internal/handler/integrations_composio.go
+            - server/internal/handler/webhook_*.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/http_handlers_and_services/service_core
+    server/http_handlers_and_services/issue_handlers:
+        dir_name: Issue、标签与属性 HTTP 处理器
+        title: Issue、标签与属性 HTTP 处理器
+        scope:
+            - server/internal/handler/issue*.go
+            - server/internal/handler/label.go
+            - server/internal/handler/property.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/plugin_skill_handlers:
+        dir_name: 插件与技能 HTTP 处理器（Plugin & Skill Handlers）
+        title: 插件与技能 HTTP 处理器（Plugin & Skill Handlers）
+        scope:
+            - server/internal/handler/plugin*.go
+            - server/internal/handler/skill*.go
+            - server/internal/handler/mcp_overlay.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/project_workspace_handlers:
+        dir_name: 项目_工作区_小队_源码上下文 HTTP 处理器
+        title: 项目/工作区/小队/源码上下文 HTTP 处理器
+        scope:
+            - server/internal/handler/project.go
+            - server/internal/handler/workspace*.go
+            - server/internal/handler/squad*.go
+            - server/internal/handler/source_context*.go
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: apps_web_desktop/web_app
+    server/http_handlers_and_services/service_core:
+        dir_name: 服务层核心：任务、自动飞行、插件与内置技能
+        title: 服务层核心：任务、自动飞行、插件与内置技能
+        scope:
+            - server/internal/service/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: server/agent_pkg
+            - path: server/http_handlers_and_services/autopilot_handlers
+            - path: server/http_handlers_and_services/integrations_webhooks
+    server/server_core_libs:
+        dir_name: 服务端核心库（HTTP Handler、Daemon 调度与 Agent 后端）
+        title: 服务端核心库（HTTP Handler、Daemon 调度与 Agent 后端）
+        scope:
+            - server/internal/
+            - server/pkg/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []

@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core/execenv
+title: 任务执行环境装配与隔离
+scope:
+    - server/internal/daemon/execenv/
+source_files: []
+depends_on: []
+related_to: []

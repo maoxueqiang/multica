@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/plugin_skill_handlers
+title: 插件与技能 HTTP 处理器（Plugin & Skill Handlers）
+scope:
+    - server/internal/handler/plugin*.go
+    - server/internal/handler/skill*.go
+    - server/internal/handler/mcp_overlay.go
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app

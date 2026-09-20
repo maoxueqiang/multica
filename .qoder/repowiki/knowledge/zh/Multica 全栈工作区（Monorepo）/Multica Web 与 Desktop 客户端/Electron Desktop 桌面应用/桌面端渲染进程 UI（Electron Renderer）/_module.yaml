@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: apps_web_desktop/desktop_app/renderer_ui
+title: 桌面端渲染进程 UI（Electron Renderer）
+scope:
+    - apps/desktop/src/renderer/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/desktop_app/electron_main
+    - path: apps_web_desktop/desktop_app/shared_types

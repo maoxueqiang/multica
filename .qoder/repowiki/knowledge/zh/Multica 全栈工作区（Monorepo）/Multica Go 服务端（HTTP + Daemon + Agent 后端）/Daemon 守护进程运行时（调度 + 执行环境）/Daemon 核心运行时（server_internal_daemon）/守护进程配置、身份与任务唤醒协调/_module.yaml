@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core/config_identity_wakeup_reconcile_gc
+title: 守护进程配置、身份与任务唤醒协调
+scope:
+    - server/internal/daemon/config.go
+    - server/internal/daemon/identity.go
+    - server/internal/daemon/wakeup.go
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/processtree_gc

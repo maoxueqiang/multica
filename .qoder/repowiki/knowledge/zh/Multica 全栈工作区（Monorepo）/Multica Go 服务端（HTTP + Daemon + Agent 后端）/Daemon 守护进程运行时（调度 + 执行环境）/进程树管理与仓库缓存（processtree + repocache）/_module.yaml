@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: server/daemon_runtime/processtree_gc
+title: 进程树管理与仓库缓存（processtree + repocache）
+scope:
+    - server/internal/daemon/processtree/
+    - server/internal/daemon/repocache/
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/daemon_core/config_identity_wakeup_reconcile_gc
+    - path: server/daemon_runtime/execenv

@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/landing_routes
+title: Landing 营销站点路由与页面
+scope:
+    - apps/web/app/(landing)/
+    - apps/web/features/landing/
+source_files: []
+depends_on: []
+related_to: []

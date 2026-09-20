@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/agent_runtime_handlers
+title: Agent 与 Runtime HTTP 处理器
+scope:
+    - server/internal/handler/agent*.go
+    - server/internal/handler/actor_guards.go
+    - server/internal/handler/admission.go
+    - server/internal/handler/runtime*.go
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app

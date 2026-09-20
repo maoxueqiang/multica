@@ -1,0 +1,46 @@
+version: 1
+
+# 文件作用域：在 .qoderignore 之上叠加。include 留空 = 不启用白名单，覆盖全仓；
+# exclude 只剔除生成物 /  vendored / 体积噪声，避免淹没代码 Wiki。
+scope:
+  include: []
+  exclude:
+    - "**/node_modules/**"
+    - "**/.turbo/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/out/**"
+    - "**/*.pb.go"
+    - "server/migrations/**"          # 958 个生成 SQL DDL，模式真相看 sqlc 模型
+    - "apps/mobile/ios/**"             # 原生工程文件，非业务代码
+    - "apps/docs/public/**"            # 静态图片资源
+    - "server/data/**"                 # 运行时上传数据
+
+repowiki:
+  # 留空 = 不套用预设模板（architecture / product_requirement），由规划器自由组织页面。
+  # 用户未明确指向某个预设，故不强行设定。
+  template: ""
+  notes:
+    - text: "Multica 是 AI 原生团队协作/任务管理平台，智能体是一等公民指派人。后端为 Go（Chi 路由 + sqlc + gorilla/websocket），前端为 pnpm workspaces + Turborepo 单体，数据库 PostgreSQL 17，运行时支持约 26 种编码智能体 CLI。"
+      author: knowledge-plan
+    - text: "智能体任务在本地守护进程（daemon）上执行；`server/internal/daemon/execenv` 是装配智能体上下文的权威位置：运行时 brief 以标记块写入 CLAUDE.md/AGENTS.md，技能水合到各 provider 原生 skills 目录，每轮 prompt 由 daemon.BuildPrompt 生成。逐轮易变字段（发起人、连接应用、续接提示）必须放在每轮消息而非 brief，以保住 prompt 缓存前缀（MUL-5377）。"
+      author: knowledge-plan
+    - text: "包边界是硬约束，勿在文档中弱化：packages/core 禁用 react-dom/localStorage/process.env；packages/ui 不得 import @multica/core 且无业务逻辑；packages/views 禁用 next/* 与 react-router-dom，走 NavigationAdapter；apps/web/platform 是唯一可用 Next.js API 之处。"
+      author: knowledge-plan
+    - text: "状态管理分层：TanStack Query 独占服务端状态，Zustand 独占客户端/视图状态，且所有共享 Zustand store 只能位于 packages/core；写文档时不要把服务端数据镜像进 store。"
+      author: knowledge-plan
+    - text: "数据库规则：禁止外键与级联，关系与依赖清理全部在应用层用事务处理；迁移里每个索引都必须用 CREATE [UNIQUE] INDEX CONCURRENTLY 且各自独立的单语句迁移文件。"
+      author: knowledge-plan
+    - text: "磁盘/仓库模型：WorkspacesRoot 下每个任务一个 env root，代码是从共享裸缓存（.repos）checkout 出的 git worktree；同一 (agent, issue) 的多轮通过 PriorWorkDir 复用同一 workdir，不同任务各占目录并行。"
+      author: knowledge-plan
+
+knowledgecard:
+  notes:
+    - text: "按以下模块识别知识卡边界，勿合并：server/pkg/agent（多 provider CLI 后端统一接口）、server/internal/daemon 与 server/internal/daemon/execenv（任务调度与执行环境装配）、server/internal/handler + service（HTTP/业务）、packages/core（无头业务逻辑）、packages/ui（原子组件）、packages/views（web/desktop 共享业务页面）。"
+      author: knowledge-plan
+    - text: "依赖方向 views -> core + ui；core 与 ui 必须互相独立，卡片中不要把二者归为一个模块。"
+      author: knowledge-plan
+    - text: "apps/mobile 是独立体系（Expo/React Native），只从 @multica/core 引入类型与纯函数；不要把它与 web/desktop 的共享层并卡。"
+      author: knowledge-plan
+    - text: "智能体技能采用渐进式加载：brief 中只列技能名索引，SKILL.md frontmatter 描述与正文由运行时按需发现/加载，不要在卡片里描述为全量内联进上下文。"
+      author: knowledge-plan

@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: apps_docs
+title: Multica 文档站点（Fumadocs + Next.js）
+scope:
+    - apps/docs/
+source_files: []
+depends_on: []
+related_to:
+    - path: packages_core

@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/chat_handlers
+title: 聊天会话、评论与钉选 HTTP 处理器
+scope:
+    - server/internal/handler/chat*.go
+    - server/internal/handler/comment*.go
+    - server/internal/handler/reaction.go
+    - server/internal/handler/pin.go
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app

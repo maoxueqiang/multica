@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: server/daemon_runtime/execenv
+title: 任务执行环境装配与隔离
+scope:
+    - server/internal/daemon/execenv/
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/daemon_core/repocache
+    - path: server/daemon_runtime/daemon_core/runtime_lifecycle_mcp
+    - path: server/daemon_runtime/daemon_core/skill_bundle_resolution
+    - path: server/daemon_runtime/processtree_gc

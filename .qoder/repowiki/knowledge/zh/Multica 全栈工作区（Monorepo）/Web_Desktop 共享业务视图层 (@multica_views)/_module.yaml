@@ -1,0 +1,14 @@
+schema_version: 1
+module_path: packages_views
+title: Web/Desktop 共享业务视图层 (@multica/views)
+scope:
+    - packages/views/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/web_app/platform_runtime
+    - path: apps_web_desktop/web_app/workspace_dashboard/agents
+    - path: apps_web_desktop/web_app/workspace_dashboard/billing_usage_settings
+    - path: apps_web_desktop/web_app/workspace_dashboard/chat_inbox_members
+    - path: apps_web_desktop/web_app/workspace_dashboard/issues_and_my_issues
+    - path: apps_web_desktop/web_app/workspace_dashboard/runtimes

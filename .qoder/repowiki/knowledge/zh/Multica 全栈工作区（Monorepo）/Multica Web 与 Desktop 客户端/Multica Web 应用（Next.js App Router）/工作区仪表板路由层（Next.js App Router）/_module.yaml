@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/workspace_dashboard
+title: 工作区仪表板路由层（Next.js App Router）
+scope:
+    - apps/web/app/[workspaceSlug]/(dashboard)/
+source_files: []
+depends_on: []
+related_to: []

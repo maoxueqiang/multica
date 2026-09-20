@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: apps_mobile/components
+title: 移动端业务组件库（Chat/Issue/Project/Composer/UI）
+scope:
+    - apps/mobile/components/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_mobile/app_shell_and_routes
+    - path: apps_mobile/lib_utilities
+    - path: packages_core

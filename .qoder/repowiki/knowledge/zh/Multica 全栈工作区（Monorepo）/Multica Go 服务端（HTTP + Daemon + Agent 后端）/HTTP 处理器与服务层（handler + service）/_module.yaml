@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: server/http_handlers_and_services
+title: HTTP 处理器与服务层（handler + service）
+scope:
+    - server/internal/handler/
+    - server/internal/service/
+source_files: []
+depends_on: []
+related_to: []

@@ -1,0 +1,51 @@
+schema_version: 1
+module_path: ""
+title: Multica 全栈工作区（Monorepo）
+scope:
+    - README.md
+    - CONTRIBUTING.md
+    - CLAUDE.md
+    - AGENTS.md
+    - VISION.md
+    - CLI_AND_DAEMON.md
+    - CLI_INSTALL.md
+    - SELF_HOSTING*.md
+    - .github/
+    - scripts/
+    - deploy/
+    - docker/
+    - e2e/
+    - examples/
+    - .agents/
+    - .dockerignore
+    - .env.example
+    - .gitattributes
+    - .gitignore
+    - .goreleaser.yml
+    - .npmrc
+    - .nvmrc
+    - .vercelignore
+    - Dockerfile
+    - Dockerfile.web
+    - LICENSE
+    - Makefile
+    - NOTICE
+    - README.zh.md
+    - SELF_HOSTING.md
+    - SELF_HOSTING_ADVANCED.md
+    - SELF_HOSTING_AI.md
+    - VISION.zh.md
+    - docker-compose.selfhost.build.yml
+    - docker-compose.selfhost.yml
+    - docker-compose.yml
+    - knip.jsonc
+    - package.json
+    - playwright.config.ts
+    - playwright.iframe.config.ts
+    - pnpm-lock.yaml
+    - pnpm-workspace.yaml
+    - skills-lock.json
+    - turbo.json
+source_files: []
+depends_on: []
+related_to: []

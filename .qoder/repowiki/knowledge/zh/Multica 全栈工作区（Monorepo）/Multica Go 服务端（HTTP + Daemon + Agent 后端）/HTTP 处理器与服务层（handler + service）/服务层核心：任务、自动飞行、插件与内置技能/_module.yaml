@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: server/http_handlers_and_services/service_core
+title: 服务层核心：任务、自动飞行、插件与内置技能
+scope:
+    - server/internal/service/
+source_files: []
+depends_on: []
+related_to:
+    - path: server/agent_pkg
+    - path: server/http_handlers_and_services/autopilot_handlers
+    - path: server/http_handlers_and_services/integrations_webhooks

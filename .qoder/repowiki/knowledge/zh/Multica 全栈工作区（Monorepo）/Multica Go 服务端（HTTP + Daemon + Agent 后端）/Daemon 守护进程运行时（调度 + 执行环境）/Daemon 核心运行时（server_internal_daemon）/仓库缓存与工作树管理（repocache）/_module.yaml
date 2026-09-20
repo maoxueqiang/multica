@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core/repocache
+title: 仓库缓存与工作树管理（repocache）
+scope:
+    - server/internal/daemon/repocache/
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/execenv

@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/shared_libs
+title: Web 应用共享工具库与运行时配置
+scope:
+    - apps/web/lib/
+    - apps/web/config/
+source_files: []
+depends_on: []
+related_to: []

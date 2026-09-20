@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/platform_runtime
+title: Web 平台运行时适配层
+scope:
+    - apps/web/platform/
+source_files: []
+depends_on: []
+related_to:
+    - path: packages_views

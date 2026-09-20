@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: server/server_core_libs
+title: 服务端核心库（HTTP Handler、Daemon 调度与 Agent 后端）
+scope:
+    - server/internal/
+    - server/pkg/
+source_files: []
+depends_on: []
+related_to: []

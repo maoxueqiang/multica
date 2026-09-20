@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: apps_web_desktop/desktop_app/shared_types
+title: 桌面端共享类型与跨进程协议
+scope:
+    - apps/desktop/src/shared/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_web_desktop/desktop_app/electron_main
+    - path: apps_web_desktop/desktop_app/renderer_ui

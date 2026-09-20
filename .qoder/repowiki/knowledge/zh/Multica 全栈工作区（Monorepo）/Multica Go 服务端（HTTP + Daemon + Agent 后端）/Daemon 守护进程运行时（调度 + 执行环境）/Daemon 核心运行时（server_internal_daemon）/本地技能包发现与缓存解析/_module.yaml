@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: server/daemon_runtime/daemon_core/skill_bundle_resolution
+title: 本地技能包发现与缓存解析
+scope:
+    - server/internal/daemon/local_skills.go
+    - server/internal/daemon/skill_cache.go
+    - server/internal/daemon/slash_skill.go
+source_files: []
+depends_on: []
+related_to:
+    - path: server/daemon_runtime/execenv

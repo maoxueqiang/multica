@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: packages_core
+title: '@multica/core 共享业务核心包'
+scope:
+    - packages/core/
+source_files: []
+depends_on: []
+related_to:
+    - path: apps_docs
+    - path: apps_mobile/app_shell_and_routes
+    - path: apps_mobile/components
+    - path: apps_mobile/lib_utilities

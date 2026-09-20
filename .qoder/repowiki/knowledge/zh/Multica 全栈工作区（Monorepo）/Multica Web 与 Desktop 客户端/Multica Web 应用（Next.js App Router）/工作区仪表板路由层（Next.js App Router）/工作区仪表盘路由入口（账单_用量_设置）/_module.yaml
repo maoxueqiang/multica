@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: apps_web_desktop/web_app/workspace_dashboard/billing_usage_settings
+title: 工作区仪表盘路由入口（账单/用量/设置）
+scope:
+    - apps/web/app/[workspaceSlug]/(dashboard)/billing/
+    - apps/web/app/[workspaceSlug]/(dashboard)/usage/
+    - apps/web/app/[workspaceSlug]/(dashboard)/settings/
+source_files: []
+depends_on: []
+related_to:
+    - path: packages_views
