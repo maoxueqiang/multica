@@ -1,9 +1,11 @@
 /**
  * Pure-function tests for the mobile attachment URL resolver. We exercise
- * the with-base form because `resolveAttachmentUrl` itself is bound at
- * module load to `process.env.EXPO_PUBLIC_API_URL`, which is what we
- * intentionally don't want to mutate in tests — the with-base helper is
- * the same code path with the API base passed in explicitly.
+ * the with-base form for everything that needs a base, since `resolveAttachmentUrl`
+ * itself reads the resolved API base from `lib/server-url-store` (override >
+ * EXPO_PUBLIC_API_URL env default) at call time — the with-base helper is the
+ * same code path with the API base passed in explicitly. `resolveAttachmentUrl`
+ * is still exercised directly below, but only for the null/absolute cases,
+ * which don't touch the store at all by design.
  *
  * Coverage target: every branch the call sites in the app rely on —
  *   - `comment-attachment-list.tsx`         → file chip Linking.openURL
@@ -11,7 +13,20 @@
  *   - `composer-attachment-row.tsx`         → completed non-image chip
  *                                             tap → Linking.openURL
  */
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+// `resolveAttachmentUrl` pulls in `@/data/server-url-accessors` (for the
+// server-relative branch only) → `@/lib/server-url-store` → `expo-secure-store`
+// → react-native's Flow-typed source, which this Node-env runner can't parse
+// (same reason `data/queries/*.test.ts` mock `@/data/api`). Mock it at the
+// boundary; the cases below never actually need a resolved base anyway (see
+// the "store-backed" describe) — this is purely to keep the module graph loadable.
+vi.mock("@/data/server-url-accessors", () => ({
+  getApiUrl: () => {
+    throw new Error("getApiUrl should not be called by these test cases");
+  },
+}));
+
 import {
   resolveAttachmentUrl,
   resolveAttachmentUrlWithBase,
@@ -109,10 +124,10 @@ describe("composer file chip — completed non-image attachment", () => {
   });
 });
 
-describe("resolveAttachmentUrl (env-bound)", () => {
-  it("matches the with-base form for an absolute URL regardless of EXPO_PUBLIC_API_URL", () => {
-    // The bound form is module-evaluation-time, but for absolute URLs the
-    // base is irrelevant — guarantees pass-through stays stable.
+describe("resolveAttachmentUrl (store-backed)", () => {
+  it("passes an absolute URL through unchanged without touching the resolved API base", () => {
+    // Server-relative resolution reads lib/server-url-store; absolute-URL
+    // pass-through must not, so it stays valid even with no server configured.
     const absolute = "https://cdn.example.test/file.pdf?Signature=s";
     expect(resolveAttachmentUrl(absolute)).toBe(absolute);
   });

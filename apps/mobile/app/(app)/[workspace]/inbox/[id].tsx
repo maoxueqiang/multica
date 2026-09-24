@@ -16,6 +16,7 @@ import {
 } from "@/data/queries/billing";
 import { useWorkspaceStore } from "@/data/workspace-store";
 import { useT } from "@/lib/i18n";
+import { getWebUrl } from "@/data/server-url-accessors";
 import {
   getAutopilotQuotaBody,
   getInboxDisplayTitle,
@@ -98,7 +99,9 @@ export default function InboxNoticeDetail() {
         !summaryQuery.data?.availableActions &&
         summaryQuery.isFetching),
   });
-  const webUrl = process.env.EXPO_PUBLIC_WEB_URL?.replace(/\/+$/, "");
+  // Already normalized (no trailing slash) by the store — see
+  // lib/server-url-store.ts.
+  const webUrl = getWebUrl();
   const billingUrl =
     webUrl && wsSlug ? `${webUrl}/${wsSlug}/settings?tab=billing` : null;
   const body = item ? getAutopilotQuotaBody(item) : null;

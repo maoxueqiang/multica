@@ -40,18 +40,19 @@ import { useAuthStore } from "@/data/auth-store";
 import { useWorkspaceStore } from "@/data/workspace-store";
 import { getToken } from "@/data/secure-storage";
 import { api } from "@/data/api";
+import { getApiUrl } from "@/data/server-url-accessors";
 import { WSClient } from "./ws-client";
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL;
-
-if (!API_URL) {
-  // ApiClient already throws on this; keeping a defensive check here
-  // avoids a confusing "URL constructor failed" deep in WSClient.
-  throw new Error("EXPO_PUBLIC_API_URL is not set");
+// http(s)://host → ws(s)://host/ws. Resolved per connect — a runtime
+// server-URL override (lib/server-url-store) must not be frozen into a
+// module constant, otherwise a remount after switching servers would keep
+// dialing the old host. getApiUrl() throws on a missing base, which stays
+// a defensive duplicate of ApiClient's check (realtime-provider used to do
+// this at module load to avoid a confusing "URL constructor failed" deep in
+// WSClient).
+function wsUrlFromBase(): string {
+  return `${getApiUrl().replace(/^http/, "ws")}/ws`;
 }
-
-// http(s)://host → ws(s)://host/ws
-const WS_URL = `${API_URL.replace(/^http/, "ws")}/ws`;
 
 const RealtimeContext = createContext<WSClient | null>(null);
 
@@ -88,7 +89,7 @@ export function RealtimeProvider({ children }: { children: React.ReactNode }) {
       if (cancelled || !token) return;
 
       ws = new WSClient({
-        url: WS_URL,
+        url: wsUrlFromBase(),
         token,
         // Re-read per connection rather than reusing the token captured
         // above: a session renewed since this effect ran would otherwise keep

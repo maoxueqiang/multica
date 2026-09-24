@@ -1,4 +1,26 @@
 import type { ExpoConfig, ConfigContext } from "expo/config";
+import { withInfoPlist, type ConfigPlugin } from "@expo/config-plugins";
+
+// iOS App Transport Security otherwise blocks plain-http requests to a
+// runtime-configured server (Settings → Server, dev builds only — see
+// lib/server-url-store.ts) the same way it blocks a LAN dev backend typed
+// as http://192.168.x.x:8080. Scoped to the dev variant on purpose:
+// staging/production point at fixed https:// hosts baked in at build time
+// (.env.staging / .env.production) and must keep ATS fully enforced.
+const withDevAts: ConfigPlugin = (config) =>
+  withInfoPlist(config, (config) => {
+    // InfoPlist is typed as Record<string, JSONValue | undefined> — cast the
+    // existing value (if any) to a plain object before spreading, since the
+    // union includes non-object JSONValue variants that TS rejects in a spread.
+    const existing = config.modResults.NSAppTransportSecurity as
+      | Record<string, unknown>
+      | undefined;
+    config.modResults.NSAppTransportSecurity = {
+      ...existing,
+      NSAllowsArbitraryLoads: true,
+    };
+    return config;
+  });
 
 /**
  * Dynamic Expo config — replaces app.json so we can read APP_ENV at runtime
@@ -14,7 +36,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   const isProd = env === "production";
   const isStaging = env === "staging";
 
-  return {
+  const baseConfig: ExpoConfig = {
     ...config,
     name: isProd
       ? "Multica"
@@ -89,4 +111,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ],
     extra: { APP_ENV: env },
   };
+
+  // Inline plugins can't go through the `plugins` array (it only resolves
+  // package names at prebuild time, and the value has to stay serializable
+  // for EAS) — call the ConfigPlugin function directly on the JS config
+  // object instead. Dev variant only, see the withDevAts comment above.
+  return isProd || isStaging ? baseConfig : withDevAts(baseConfig);
 };

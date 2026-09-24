@@ -27,6 +27,13 @@ vi.mock("@/data/auth-store", () => ({ useAuthStore: () => "user-1" }));
 vi.mock("@/data/workspace-store", () => ({ useWorkspaceStore: () => "workspace" }));
 vi.mock("@/data/secure-storage", () => ({ getToken: async () => "token" }));
 vi.mock("@/data/api", () => ({ api: { getToken: () => "token" } }));
+// realtime-provider resolves its WS URL via getApiUrl() (data/server-url-accessors)
+// rather than reading EXPO_PUBLIC_API_URL directly at module load. Mock the
+// accessor so this Node-environment test doesn't pull in the real store, which
+// reaches expo-secure-store -> react-native and can't be parsed here.
+vi.mock("@/data/server-url-accessors", () => ({
+  getApiUrl: () => "https://example.test",
+}));
 
 // Run the provider's effect and its actual WSClient, without rendering RN.
 class MockWebSocket {

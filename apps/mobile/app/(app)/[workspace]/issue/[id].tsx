@@ -37,6 +37,7 @@ import { useDeleteIssue } from "@/data/mutations/issues";
 import { pinListOptions } from "@/data/queries/pins";
 import { useCreatePin, useDeletePin } from "@/data/mutations/pins";
 import { useAuthStore } from "@/data/auth-store";
+import { getWebUrl } from "@/data/server-url-accessors";
 import { useIssueRealtime } from "@/data/realtime/use-issue-realtime";
 import { useWorkspaceStore } from "@/data/workspace-store";
 import { useViewedIssuesStore } from "@/data/viewed-issues-store";
@@ -114,7 +115,7 @@ export default function IssueDetail() {
   // the timeline list, not in this menu — one entry per action.
   const onPressMore = useCallback(() => {
     if (!issue || !wsSlug) return;
-    const webUrl = process.env.EXPO_PUBLIC_WEB_URL;
+    const webUrl = getWebUrl();
     const issueLink = webUrl
       ? `${webUrl}/${wsSlug}/issue/${issue.identifier}`
       : null;

@@ -342,6 +342,10 @@ export default function WorkspaceLayout() {
             }}
         />
         <Stack.Screen
+          name="more/settings/server"
+          options={{ title: "Server", headerBackTitle: "Settings" }}
+        />
+        <Stack.Screen
           name="new-issue"
           options={{
             title: t("navigation:routes.new_issue"),

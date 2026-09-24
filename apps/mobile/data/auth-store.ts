@@ -15,6 +15,7 @@ import { api, ApiError } from "./api";
 import { clearToken, getToken, setToken } from "./secure-storage";
 import { invalidateSessionEpoch } from "./session-epoch";
 import { useWorkspaceStore } from "./workspace-store";
+import { useServerUrlStore } from "@/lib/server-url-store";
 
 interface AuthState {
   user: User | null;
@@ -33,6 +34,12 @@ export const useAuthStore = create<AuthState>((set) => ({
   isLoading: true,
 
   initialize: async () => {
+    // Restore the configured server URL before anything can fire a request —
+    // ApiClient/WSClient/attachment resolution all read the resolved base
+    // synchronously via data/server-url-accessors.ts, which stays unset (env
+    // default only) until this runs.
+    await useServerUrlStore.getState().restore();
+
     // Restore the persisted workspace slug alongside the auth token so the
     // entry redirect (app/index.tsx) can route directly to the last-used
     // workspace without flashing /select-workspace.

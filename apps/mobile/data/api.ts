@@ -138,15 +138,7 @@ import { getCurrentSlug } from "./workspace-store";
 import { parseWithFallback } from "@/lib/parse-response";
 import { createRequestId } from "@/lib/request-id";
 import { buildCommentUpdateBody } from "./revision";
-
-const API_URL = process.env.EXPO_PUBLIC_API_URL;
-
-if (!API_URL) {
-  throw new Error(
-    "EXPO_PUBLIC_API_URL is not set. Add it to the apps/mobile env file for " +
-      "the variant you are running (see apps/mobile/README.md).",
-  );
-}
+import { getApiUrl } from "./server-url-accessors";
 
 export interface LoginResponse {
   token: string;
@@ -265,7 +257,7 @@ class ApiClient {
 
     let res: Response;
     try {
-      res = await fetch(`${API_URL}${path}`, {
+      res = await fetch(`${getApiUrl()}${path}`, {
         ...init,
         signal: controller.signal,
         headers,
@@ -1336,7 +1328,7 @@ class ApiClient {
 
     console.log(`[api] → POST ${path}`, { rid, filename: asset.name });
 
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiUrl()}${path}`, {
       method: "POST",
       headers,
       body: formData,

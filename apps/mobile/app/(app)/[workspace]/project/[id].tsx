@@ -42,6 +42,7 @@ import { useDeleteProject } from "@/data/mutations/projects";
 import { pinListOptions } from "@/data/queries/pins";
 import { useCreatePin, useDeletePin } from "@/data/mutations/pins";
 import { useAuthStore } from "@/data/auth-store";
+import { getWebUrl } from "@/data/server-url-accessors";
 import { useProjectRealtime } from "@/data/realtime/use-project-realtime";
 import { useWorkspaceStore } from "@/data/workspace-store";
 import { useT } from "@/lib/i18n";
@@ -88,7 +89,7 @@ export default function ProjectDetail() {
 
   const onPressMore = () => {
     if (!project) return;
-    const wsUrl = process.env.EXPO_PUBLIC_WEB_URL;
+    const wsUrl = getWebUrl();
     const actions = ["cancel", isPinned ? "unpin" : "pin", "edit"];
     if (wsUrl) actions.push("open_web");
     actions.push("delete");

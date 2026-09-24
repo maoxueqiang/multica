@@ -9,6 +9,9 @@
  * Subscreens push under more/settings/:
  *   - more/settings/profile        — edit name + avatar
  *   - more/settings/notifications  — per-group inbox + system toggles
+ *   - more/settings/server         — runtime API/web base URL override
+ *                                     (dev builds only, see the __DEV__
+ *                                     gate on the row below)
  *
  * Theme picker stays inline (3 fixed options, fits in one section).
  */
@@ -95,6 +98,7 @@ export default function SettingsPage() {
   const goProfile = () => router.push(`/${currentSlug}/more/settings/profile`);
   const goNotifications = () =>
     router.push(`/${currentSlug}/more/settings/notifications`);
+  const goServer = () => router.push(`/${currentSlug}/more/settings/server`);
 
   return (
     <ScrollView
@@ -127,6 +131,21 @@ export default function SettingsPage() {
           title={t("notifications.title")}
           subtitle={t("account.notifications_subtitle")}
         />
+        {/* Gated to dev builds only: a shipped client must not let users
+         *  repoint the app at an arbitrary server (session/token risk).
+         *  Resolution itself (lib/server-url-store) is never gated — only
+         *  this entry point is. See more/settings/server.tsx. */}
+        {__DEV__ ? (
+          <>
+            <Separator />
+            <NavRow
+              onPress={goServer}
+              chevronColor={mutedFg}
+              title="Server"
+              subtitle="API and web base URLs (dev builds only)"
+            />
+          </>
+        ) : null}
       </SectionGroup>
 
       <SectionGroup title={t("account.workspaces")}>

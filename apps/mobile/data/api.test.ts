@@ -10,6 +10,11 @@ vi.hoisted(() => {
 // The real store pulls in expo-secure-store; the client only needs the slug.
 vi.mock("@/data/workspace-store", () => ({ getCurrentSlug: () => null }));
 
+// Same reason: api.ts now resolves its base URL via getApiUrl() (see
+// ./server-url-accessors), whose real implementation reaches expo-secure-store
+// -> react-native and can't be parsed in this Node environment.
+vi.mock("./server-url-accessors", () => ({ getApiUrl: () => "https://api.example.test" }));
+
 describe("api.deleteComment", () => {
   const fetchMock = vi.fn(async () => new Response(null, { status: 204 }));
 
